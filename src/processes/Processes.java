@@ -77,7 +77,7 @@ public class Processes {
             decrypt(firstFile, secondFile, i);
             for (String verifyWord :
                     verificationDictionary) {
-                if ((fileRW.fileReader(firstFile)
+                if ((fileRW.fileReader(secondFile)
                            .toLowerCase()).contains(verifyWord)) {
                     counter++;
                 }

@@ -76,8 +76,8 @@ public class Interface {
             secondFileName = scanner.nextLine();
             validator.validateWritingFile(secondFileName);
             System.out.print(KEY);
-            String c = scanner.nextLine();
-            key = Integer.parseInt(c);
+            String bufKey = scanner.nextLine();
+            key = Integer.parseInt(bufKey);
             validator.validateKey(key);
             programRunning.decrypt(firstFileName, secondFileName, key);
         }
