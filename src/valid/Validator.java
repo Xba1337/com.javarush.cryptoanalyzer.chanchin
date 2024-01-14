@@ -11,6 +11,8 @@ import java.util.List;
 public class Validator {
     private final static List<String> unusableFilename = List.of(".bash_history", ".bash_profile", "etc", "proc");
 
+    private static char result;
+
 
     public void validateReadingFile(String filePath){
         Path path = Path.of(filePath);
@@ -54,9 +56,10 @@ public class Validator {
             if (! Files.isWritable(path)) {
                 throw new newFileException("Отсутствует доступ к данному файлу: " + path);
             }
-        } else {
-            throw new newFileException("Файла " + path.getFileName() + " не существует.");
         }
+        /*else {
+            throw new newFileException("Файла " + path.getFileName() + " не существует.");
+        } */
     }
 
     public void validateKey(int code){
@@ -68,11 +71,10 @@ public class Validator {
 
     public void validateSymbol(char[] text, char[] alphabet){
         if (!charContains(text, alphabet)) {
-            throw new newFileException("Текст содержит недопустимый символ.");
+            throw new newFileException("Текст содержит недопустимый символ: " + result);
         }
 
     }
-
     public static boolean charContains(char[] text, char[] alphabet) {
         for (int i = 0; i < text.length; i++) {
             boolean containsChar = false;
@@ -81,7 +83,10 @@ public class Validator {
                     containsChar = true;
                 }
             }
-            if (!containsChar) return false;
+            if (!containsChar) {
+                result = text[i];
+                return false;
+            }
         }
         return true;
     }

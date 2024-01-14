@@ -18,13 +18,18 @@ public class FileReaderWriter {
         }
 
     }
-        public Path fileWriter (String file, String symbols){
-            try {
-                Path path = Path.of(file);
+
+    public Path fileWriter(String file, String symbols) {
+        try {
+            Path path = Path.of(file);
+            if (Files.exists(path)) {
                 Files.writeString(path, String.valueOf(symbols));
-                return Files.writeString(path, String.valueOf(symbols));
-            } catch (IOException e) {
-                throw new newFileException(e.getMessage(), e);
+            } else {
+                Files.createFile(path);
             }
+            return Files.writeString(path, String.valueOf(symbols));
+        } catch (IOException e) {
+            throw new newFileException(e.getMessage(), e);
         }
     }
+}
